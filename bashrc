@@ -27,10 +27,10 @@ if [ $UID -eq 0 ]; then
 fi
 
 hname=""
-if [ ${HOSTNAME} == "koeserv" ]; then
+if [[ "${HOSTNAME}" == "koeserv" ]]; then
     hname="$CYAN@koeserv"
-elif [ ${HOSTNAME} == "sremote" || ${HOSTNAME} == "deze" ||
-    ${USER} == "koenk" ]; then
+elif [[ "${HOSTNAME}" == "sremote" || "${HOSTNAME}" == "deze" ||
+    "${USER}" == "koenk" ]]; then
     hname="$YELLOW@UvA"
 fi
 
