@@ -11,6 +11,7 @@ set nocompatible " With vi
 filetype plugin indent on
 set autochdir " Change into file's dir.
 set fileformats=unix,dos,mac " Support all, prefer unix
+set hidden 
 
 set nobackup
 "set backup " Backup files
@@ -18,7 +19,7 @@ set nobackup
 "set directory=~/.vim/tmp " Swap files
 
 set textwidth=80 " 80 chars per line
-set colorcolumn=80 " 80 char mark
+set colorcolumn=+1 " 80 char mark
 set linebreak " Break lines after 80 chars at logical points
 set wrap " And otherwise always
 set number " Line numbers
