@@ -13,6 +13,8 @@ set autochdir " Change into file's dir.
 set fileformats=unix,dos,mac " Support all, prefer unix
 
 set nobackup
+set nowritebackup
+set noswapfile
 "set backup " Backup files
 "set backupdir=~/.vim/backup
 "set directory=~/.vim/tmp " Swap files
@@ -24,6 +26,7 @@ set wrap " And otherwise always
 set number " Line numbers
 set numberwidth=5 " 99999 lines max
 set showmatch " Matching braces
+set cursorline
 
 " No sound/bells
 set noerrorbells
@@ -36,6 +39,7 @@ set incsearch " Incremental search
 set ignorecase
 set smartcase
 set hlsearch " Highlight search results
+set wrapscan " Wrap around
 
 " Indentation (4 spaces)
 set smarttab
@@ -60,6 +64,9 @@ func! DeleteTrailingWS()
 endfunc
 autocmd BufWrite *.py :call DeleteTrailingWS()
 
+" Spell check in LaTeX files
+autocmd FileType tex setlocal spell spelllang=en_us
+
 " Smart home
 map <khome> <home>
 nmap <khome> <home>
@@ -73,6 +80,11 @@ function! Home()
         normal 0
     endif
 endfunction
+
+" Restore last cursor position
+if has("autocmd")
+    au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
 
 command! W w
 command! Q q
