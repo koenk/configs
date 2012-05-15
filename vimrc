@@ -57,13 +57,8 @@ nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-" Delete all trailing whitespaces for Python
-func! DeleteTrailingWS()
-    exe "normal mz"
-    %s/\s\+$//ge
-    exe "normal `z"
-endfunc
-autocmd BufWrite *.py :call DeleteTrailingWS()
+" Remove trailing whitespace
+au BufWrite * :%s/\s\+$//e
 
 " Spell check in LaTeX files
 autocmd FileType tex setlocal spell spelllang=en_us
