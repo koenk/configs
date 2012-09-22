@@ -11,7 +11,7 @@ set nocompatible " With vi
 filetype plugin indent on
 set autochdir " Change into file's dir.
 set fileformats=unix,dos,mac " Support all, prefer unix
-set hidden 
+set hidden
 
 set nobackup
 set nowritebackup
@@ -59,9 +59,6 @@ vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
 " Remove trailing whitespace
 au BufWrite * :%s/\s\+$//e
-
-" Spell check in LaTeX files
-autocmd FileType tex setlocal spell spelllang=en_us
 
 " Smart home
 map <khome> <home>

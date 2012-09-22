@@ -75,7 +75,7 @@ function findif() {
 }
 
 # mkdir & cd into it
-function mc() {
+function mkc() {
   mkdir -p "$*" && cd "$*" && pwd
 }
 
