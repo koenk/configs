@@ -46,7 +46,6 @@ set wrapscan " Wrap around
 set smarttab
 set expandtab
 set autoindent
-set smartindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4

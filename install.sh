@@ -22,6 +22,9 @@ vimdir="$HOME/.vim"
 vimdir_root="$root_homedir/.vim"
 
 tmux="/etc/tmux.conf"
+xresources="$HOME/.Xresources"
+awesomerc="$HOME/.config/awesome/rc.lua"
+
 
 # How are the files called in the repository
 local_dir="$( cd "$( dirname "$0" )" && pwd)"
@@ -29,6 +32,8 @@ local_bashrc="$local_dir/bashrc"
 local_vimrc="$local_dir/vimrc"
 local_vimdir="$local_dir/vim"
 local_tmux="$local_dir/tmux.conf"
+local_xresources="$local_dir/Xresources"
+local_awesomerc="$local_dir/awesome_rc.lua"
 
 function do_install() {
     # Sudo stuff
@@ -67,3 +72,5 @@ do_install "$local_vimrc" "$vimrc_root" "root"
 do_install "$local_vimdir" "$vimdir"
 do_install "$local_vimdir" "$vimdir_root" "root"
 do_install "$local_tmux" "$tmux" "root"
+do_install "$local_xresources" "$xresources"
+do_install "$local_awesomerc" "$awesomerc"
