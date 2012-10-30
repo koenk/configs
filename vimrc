@@ -21,7 +21,9 @@ set noswapfile
 "set directory=~/.vim/tmp " Swap files
 
 set textwidth=80 " 80 chars per line
-set colorcolumn=+1 " 80 char mark
+if exists('+colorcolumn')
+    set colorcolumn=+1 " 80 char mark
+endif
 set linebreak " Break lines after 80 chars at logical points
 set wrap " And otherwise always
 set number " Line numbers

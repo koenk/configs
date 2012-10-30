@@ -32,6 +32,8 @@ if [[ "${HOSTNAME}" == "koeserv" ]]; then
 elif [[ "${HOSTNAME}" == "sremote" || "${HOSTNAME}" == "deze" ||
     "${USER}" == "koenk" ]]; then
     hname="$YELLOW@UvA"
+elif [[ "${USER}" == "kkoning" ]]; then
+    hname="$BLUE@DAS4,${HOSTNAME}"
 fi
 
 
