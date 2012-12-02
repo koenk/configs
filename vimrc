@@ -1,11 +1,3 @@
-" Syntax highlighting
-set t_Co=256 " 256 color term
-set background=dark
-syntax on
-"color koehler
-color molokai
-hi ColorColumn ctermbg=lightgrey guibg=lightgrey
-
 " General
 set nocompatible " With vi
 filetype plugin indent on
@@ -13,12 +5,15 @@ set autochdir " Change into file's dir.
 set fileformats=unix,dos,mac " Support all, prefer unix
 set hidden
 
+call pathogen#infect()
+
+let mapleader="," " Change leader to , instead of \
+set ofu=syntaxcomplete#Complete " Omnicomplete
+let g:SuperTabDefaultCompletionType = "context" " Supertab
+
 set nobackup
 set nowritebackup
 set noswapfile
-"set backup " Backup files
-"set backupdir=~/.vim/backup
-"set directory=~/.vim/tmp " Swap files
 
 set textwidth=80 " 80 chars per line
 if exists('+colorcolumn')
@@ -51,6 +46,31 @@ set autoindent
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+
+" Syntax highlighting
+set t_Co=256 " 256 color term
+set background=dark
+syntax on
+color molokai
+hi ColorColumn              ctermbg=lightgrey guibg=lightgrey
+hi Pmenu       ctermfg=252  ctermbg=240
+hi PmenuSel    ctermfg=254  ctermbg=243
+
+" Also map : to ; for no-shift
+nnoremap ; :
+
+" Y like C,D etc
+nmap Y y$
+
+" Clears search highlighting
+nnoremap <space> :noh<CR>
+
+" Select pasted text
+nnoremap <leader>v V`]
+
+" Move by screen lines instead of file lines up and down.
+nnoremap j gj
+nnoremap k gk
 
 " Move a line of text using alt+[jk]
 nmap <M-j> mz:m+<cr>`z
