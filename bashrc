@@ -11,6 +11,7 @@ export HISTCONTORL=ignoreboth
 
 #export EDITOR=nano
 export EDITOR=vim
+export BROWSER=chromium
 
 
 RED="\[\e[1;31m\]"
@@ -60,6 +61,12 @@ alias da='date "+%A, %B, %d, %Y [%T]"'
 alias dul='du --max-depth=1'
 alias tmux='tmux -2' # Forces 256 color
 
+alias gs='git status'
+alias gc='git commit'
+alias ga='git add'
+alias gp='git pull'
+alias gd='git diff'
+
 if [ $UID -ne 0 ]; then
 	alias reboot='sudo reboot'
 	alias poweroff='sudo poweroff'
@@ -69,7 +76,7 @@ fi
 
 # Very specific stuff
 alias mountuva='sshfs koenk@sremote.science.uva.nl: /media/uva/'
-alias mountkoeserv='sshfs koeserv: /media/koeserv'
+alias mountkoeserv='sshfs koeserv:/ /media/koeserv'
 
 # Find a specific string IN a file (in all subdirs)
 function findif() {

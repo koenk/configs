@@ -179,7 +179,7 @@ volumecfg.mixercommand = function (command)
     else
         volume = volume .. "M"
     end
-    volumecfg.widget.text = volume
+    volumecfg.widget:set_text(volume)
 end
 volumecfg.update = function ()
     volumecfg.mixercommand(" sget " .. volumecfg.channel)
