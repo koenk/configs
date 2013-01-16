@@ -1,12 +1,14 @@
 !
 ! xterm
 !
-*background: #000000
-*foreground: #ffffff
+xterm*background: #000000
+xterm*foreground: #ffffff
 
 !
 ! urxvt (rxvt-unicode)
 !
+URxvt*background: #000000
+URxvt*foreground: #ffffff
 URxvt.scrollBar: false
 URxvt*termName: screen-256color
 URxvt.perl-ext: default,url-select,clipboard
@@ -17,3 +19,5 @@ URxvt.url-select.underline: true
 ! Clipboard integration with X
 URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
+! That utf8 input box thing when pressing ctrl+shift
+URxvt.iso14755: false
