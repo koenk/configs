@@ -3,6 +3,7 @@
 [ -z "$PS1" ] && return
 
 shopt -s checkwinsize
+shopt -s autocd
 
 shopt -s histappend
 export HISTSIZE=10000
@@ -47,6 +48,7 @@ alias grep='grep --color=auto'
 
 alias ll='ls -lhA'
 alias l='ls'
+alias sl='ls'
 alias la='ls -a'
 alias grep='grep -i'
 alias cd..='cd ..'
@@ -89,11 +91,20 @@ function mkc() {
 }
 
 # cd & ll
-#alias lc="cl"
 function cl () {
    if [ $# = 0 ]; then
       cd && ll
    else
       cd "$*" && ll
    fi
+}
+
+# Rewrite cd to accept files as path (cd into path containing file)
+function cd() {
+    if [ ! $# = 0 ] && [[ -f $@ ]]; then
+        echo "cd `dirname $@`"
+        builtin cd `dirname $@`
+    else
+        builtin cd $@
+    fi
 }
