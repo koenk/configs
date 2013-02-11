@@ -1,4 +1,3 @@
-
 # Check for an interactive session
 [ -z "$PS1" ] && return
 
@@ -8,7 +7,7 @@ shopt -s autocd
 shopt -s histappend
 export HISTSIZE=10000
 export HISTFILESIZE=10000
-export HISTCONTORL=ignoreboth
+export HISTCONTROL=ignoreboth
 
 #export EDITOR=nano
 export EDITOR=vim
