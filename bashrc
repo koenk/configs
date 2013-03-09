@@ -5,13 +5,17 @@ shopt -s checkwinsize
 shopt -s autocd
 
 shopt -s histappend
-export HISTSIZE=10000
-export HISTFILESIZE=10000
+export HISTSIZE=100000
+export HISTFILESIZE=100000
 export HISTCONTROL=ignoreboth
 
 #export EDITOR=nano
 export EDITOR=vim
 export BROWSER=chromium
+
+# Search in history with up/down keys
+bind '"\e[A":history-search-backward'
+bind '"\e[B":history-search-forward'
 
 
 RED="\[\e[1;31m\]"
@@ -50,6 +54,7 @@ alias l='ls'
 alias sl='ls'
 alias la='ls -a'
 alias grep='grep -i'
+alias ack='ack -i'
 alias cd..='cd ..'
 alias ..='cd ..'
 alias df='df -h'
@@ -66,7 +71,10 @@ alias gs='git status'
 alias gc='git commit'
 alias ga='git add'
 alias gp='git pull'
+alias gpr='git pull -r'
 alias gd='git diff'
+alias gb='git blame'
+alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 if [ $UID -ne 0 ]; then
 	alias reboot='sudo reboot'
@@ -77,7 +85,7 @@ fi
 
 # Very specific stuff
 alias mountuva='sshfs koenk@sremote.science.uva.nl: /media/uva/'
-alias mountkoeserv='sshfs koeserv:/ /media/koeserv'
+alias mountkoeserv='sshfs -o allow_other,default_permissions koen@koeserv:/ /media/koeserv'
 
 # Find a specific string IN a file (in all subdirs)
 function findif() {
@@ -106,4 +114,25 @@ function cd() {
     else
         builtin cd $@
     fi
+}
+
+extract () {
+    if [ -f $1 ] ; then
+      case $1 in
+        *.tar.bz2)   tar xjf $1     ;;
+        *.tar.gz)    tar xzf $1     ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar e $1     ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar xf $1      ;;
+        *.tbz2)      tar xjf $1     ;;
+        *.tgz)       tar xzf $1     ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *)     echo "'$1' cannot be extracted via extract()" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
 }
