@@ -9,7 +9,6 @@ export HISTSIZE=100000
 export HISTFILESIZE=100000
 export HISTCONTROL=ignoreboth
 
-#export EDITOR=nano
 export EDITOR=vim
 export BROWSER=chromium
 
@@ -17,7 +16,12 @@ export BROWSER=chromium
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 
+# Fix some autocomplete stuff
+#  Use chromium for pdf, htm(l)
+_xspecs[chromium]='!*.@(pdf|htm?(l))'
+complete -F _filedir_xspec chromium
 
+# Build a nice PS1
 RED="\[\e[1;31m\]"
 GREEN="\[\e[1;32m\]"
 BLUE="\[\e[1;34m\]"
