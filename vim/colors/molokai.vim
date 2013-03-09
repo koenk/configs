@@ -78,7 +78,7 @@ hi Search          guifg=#FFFFFF guibg=#455354
 " marks column
 hi SignColumn      guifg=#A6E22E guibg=#232526
 hi SpecialChar     guifg=#F92672               gui=bold
-hi SpecialComment  guifg=#465457               gui=bold
+hi SpecialComment  guifg=#7E8E91               gui=bold
 hi Special         guifg=#66D9EF guibg=bg      gui=italic
 if has("spell")
     hi SpellBad    guisp=#FF0000 gui=undercurl
@@ -116,7 +116,7 @@ if s:molokai_original == 1
    hi SpecialKey      guifg=#75715E
 else
    hi Normal          guifg=#F8F8F2 guibg=#1B1D1E
-   hi Comment         guifg=#465457
+   hi Comment         guifg=#7E8E91
    hi CursorLine                    guibg=#293739
    hi CursorColumn                  guibg=#293739
    hi ColorColumn                   guibg=#232526
@@ -129,6 +129,13 @@ end
 " Support for 256-color terminal
 "
 if &t_Co > 255
+   if s:molokai_original == 1
+      hi Normal                   ctermbg=234
+      hi CursorLine               ctermbg=235   cterm=none
+   else
+      hi Normal       ctermfg=252 ctermbg=233
+      hi CursorLine               ctermbg=234   cterm=none
+   endif
    hi Boolean         ctermfg=135
    hi Character       ctermfg=144
    hi Number          ctermfg=135
@@ -183,7 +190,7 @@ if &t_Co > 255
    hi SignColumn      ctermfg=118 ctermbg=235
    hi SpecialChar     ctermfg=161               cterm=bold
    hi SpecialComment  ctermfg=245               cterm=bold
-   hi Special         ctermfg=81  ctermbg=232
+   hi Special         ctermfg=81 
 
    hi Statement       ctermfg=161               cterm=bold
    hi StatusLine      ctermfg=238 ctermbg=253
@@ -204,9 +211,7 @@ if &t_Co > 255
    hi WarningMsg      ctermfg=231 ctermbg=238   cterm=bold
    hi WildMenu        ctermfg=81  ctermbg=16
 
-   hi Normal          ctermfg=252 ctermbg=233
    hi Comment         ctermfg=59
-   hi CursorLine                  ctermbg=234   cterm=none
    hi CursorColumn                ctermbg=234
    hi ColorColumn                 ctermbg=234
    hi LineNr          ctermfg=250 ctermbg=234
