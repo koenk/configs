@@ -20,6 +20,9 @@ bind '"\e[B":history-search-forward'
 #  Use chromium for pdf, htm(l)
 _xspecs[chromium]='!*.@(pdf|htm?(l))'
 complete -F _filedir_xspec chromium
+#  Love opens .love files...
+_xspecs[love]='!*.@(love)'
+complete -F _filedir_xspec love
 
 # Build a nice PS1
 RED="\[\e[1;31m\]"
@@ -28,7 +31,6 @@ BLUE="\[\e[1;34m\]"
 CYAN="\[\e[1;36m\]"
 YELLOW="\[\e[1;93m\]"
 RESET_COL="\[\e[0m\]"
-
 
 user_col=${GREEN}
 if [ $UID -eq 0 ]; then
@@ -45,8 +47,8 @@ elif [[ "${USER}" == "kkoning" ]]; then
     hname="$BLUE@DAS4,${HOSTNAME}"
 fi
 
-
 PS1="$user_col\u$hname $BLUE\w $GREEN\$ $RESET_COL"
+
 
 eval $(dircolors -b)
 
@@ -60,7 +62,6 @@ alias la='ls -a'
 alias grep='grep -i'
 alias ack='ack -i'
 alias cd..='cd ..'
-alias ..='cd ..'
 alias df='df -h'
 alias du='du -c -h'
 alias locate='locate -i'
@@ -80,21 +81,20 @@ alias gd='git diff'
 alias gb='git blame'
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
+# If not root, prepend sudo when needed
 if [ $UID -ne 0 ]; then
-	alias reboot='sudo reboot'
-	alias poweroff='sudo poweroff'
-	alias update='sudo pacman -Su'
+	#alias reboot='sudo reboot'
+	#alias poweroff='sudo poweroff'
 	alias pacman='sudo pacman'
+    alias netcfg='sudo netcfg'
+    alias wifi-menu='sudo wifi-menu'
+    alias vpnc='sudo vpnc'
+    alias updatedb='sudo updatedb'
 fi
 
 # Very specific stuff
 alias mountuva='sshfs koenk@sremote.science.uva.nl: /media/uva/'
 alias mountkoeserv='sshfs -o allow_other,default_permissions koen@koeserv:/ /media/koeserv'
-
-# Find a specific string IN a file (in all subdirs)
-function findif() {
-  find . -exec grep -n "$@" "{}" \; -print
-}
 
 # mkdir & cd into it
 function mkc() {
@@ -113,13 +113,21 @@ function cl () {
 # Rewrite cd to accept files as path (cd into path containing file)
 function cd() {
     if [ ! $# = 0 ] && [[ -f $@ ]]; then
-        echo "cd `dirname $@`"
-        builtin cd `dirname $@`
+        echo "cd `dirname "$@"`"
+        builtin cd "`dirname "$@"`"
     else
-        builtin cd $@
+        builtin cd "$@" 2> /dev/null
+
+        # I have a bad habit of typing 'l' (alias of ls) before pressing the
+        # enter key for the cd line. Fix that here too while we're at it...
+        if [ ! $? = 0 ] && [[ $@ =~ /l$ ]]; then
+            builtin cd "`dirname "$@"`"
+            l
+        fi
     fi
 }
 
+# Extracts any archive format you throw at it (kinda)
 extract () {
     if [ -f $1 ] ; then
       case $1 in
