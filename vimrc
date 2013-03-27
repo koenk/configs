@@ -5,7 +5,6 @@ set autochdir " Change into file's dir.
 set fileformats=unix,dos,mac " Support all, prefer unix
 set encoding=utf8 " Use UTF-8 as standard encoding
 set hidden " Support hidden buffers (backgrounded buffers with unsaved changes)
-set mouse=a " Mouse support.
 let mapleader="," " Change leader to , instead of \
 
 set ofu=syntaxcomplete#Complete " Omnicomplete
@@ -64,10 +63,11 @@ set backspace=eol,start,indent
 set t_Co=256 " 256 color term
 set background=dark
 syntax on
-color molokai
-hi ColorColumn              ctermbg=lightgrey guibg=lightgrey
-hi Pmenu       ctermfg=252  ctermbg=240
-hi PmenuSel    ctermfg=254  ctermbg=243
+color wombat256mod
+"hi ColorColumn              ctermbg=lightgrey guibg=lightgrey
+hi ColorColumn              ctermbg=239 guibg=lightgrey
+"hi Pmenu       ctermfg=252  ctermbg=240
+"hi PmenuSel    ctermfg=254  ctermbg=243
 
 " Also map : to ; for no-shift
 nnoremap ; :
@@ -131,4 +131,3 @@ command! Wq wq
 
 " Auto reload vimrc after editing
 autocmd! bufwritepost ~/.vimrc source ~/.vimrc
-
