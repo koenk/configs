@@ -47,6 +47,7 @@ terminal = "urxvt"
 browser = "chromium"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
+lock_command = "xlock"
 network_interface = "wlan0"
 
 -- Default modkey.
@@ -153,6 +154,10 @@ vicious.register(networkwidget,
             local uk = args["{"..network_interface.." up_kb}"]
             local dm = args["{"..network_interface.." down_mb}"]
             local um = args["{"..network_interface.." up_mb}"]
+            if dk == nil or uk == nil or dm == nil or um == nil then
+                networktooltip:set_text("Network: interface not found")
+                return 100
+            end
             networktooltip:set_text("Network: "..dk.."KB/s "..uk.."KB/s")
             return 100 * (dm + um)
         end)
@@ -345,6 +350,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey,           }, "space", function () awful.util.spawn(terminal) end),
     awful.key({ modkey,           }, "c",      function () awful.util.spawn(browser)  end),
+    awful.key({ modkey,           }, "v", function () awful.util.spawn(lock_command) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
 
@@ -388,7 +394,6 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
-    awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
     awful.key({ modkey,           }, "n",
         function (c)
