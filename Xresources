@@ -11,6 +11,7 @@ URxvt*background: #000000
 URxvt*foreground: #ffffff
 URxvt.scrollBar: false
 URxvt*termName: screen-256color
+URxvt.intensityStyles: false
 URxvt.perl-ext: default,url-select,clipboard
 ! Open urls
 URxvt.keysym.M-u: perl:url-select:select_next
