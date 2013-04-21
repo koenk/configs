@@ -177,12 +177,16 @@ volumecfg.mixercommand = function (command)
     fd:close()
 
     local volume = string.match(status, "(%d?%d?%d)%%")
-    volume = string.format("% 3d", volume)
-    status = string.match(status, "%[(o[^%]]*)%]")
-    if string.find(status, "on", 1, true) then
-        volume = volume .. "%"
+    if not volume then
+        volume = "EE"
     else
-        volume = volume .. "M"
+        volume = string.format("% 3d", volume)
+        status = string.match(status, "%[(o[^%]]*)%]")
+        if string.find(status, "on", 1, true) then
+            volume = volume .. "%"
+        else
+            volume = volume .. "M"
+        end
     end
     volumecfg.widget:set_text(volume)
 end
