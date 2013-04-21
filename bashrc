@@ -1,6 +1,7 @@
 # Check for an interactive session
 [ -z "$PS1" ] && return
 
+eval $(dircolors -b)
 shopt -s checkwinsize
 shopt -s autocd
 
@@ -64,7 +65,7 @@ elif [[ "${HOSTNAME}" == "sremote" || "${HOSTNAME}" == "deze" ||
     hname="$YELLOW@UvA"
 elif [[ "${USER}" == "kkoning" ]]; then
     hname="$BLUE@DAS4,${HOSTNAME}"
-elif [[ "$(who am i)" != "" ]]; then
+elif [[ "$(who am i | awk '{print $5}')" != "" ]]; then
     # Hacky way of detecting ssh (env vars won't work when su'ing)
     hname="$WHITE@$HOSTNAME"
 fi
@@ -172,42 +173,47 @@ generate_prompt() {
 PROMPT_COMMAND=generate_prompt
 
 
-eval $(dircolors -b)
-
+# Set default options for some commands
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
+alias grep='grep -i'
+alias ack='ack -i'
+alias df='df -h'
+alias du='du -c -h'
+alias locate='locate -i'
+alias less='less -R' # Interpret ANSI color escape sequences
+alias tmux='tmux -2' # Forces 256 color
 
+# Shorthands, typo's and new commands
 alias ll='ls -lhA'
 alias l='ls'
 alias sl='ls'
 alias la='ls -a'
-alias grep='grep -i'
-alias ack='ack -i'
 alias cd..='cd ..'
-alias df='df -h'
-alias du='du -c -h'
-alias locate='locate -i'
-
 alias more='less'
+alias v='vim -R -' # Piping into vim
 alias hist='history|grep $1'
 alias da='date "+%A, %B, %d, %Y [%T]"'
 alias dul='du --max-depth=1'
-alias tmux='tmux -2' # Forces 256 color
+alias cack='ack --color --group'
+alias ackc='cack'
 
+# Git related shortcuts
 alias gs='git status'
 alias gc='git commit'
+alias gco='git checkout'
+alias gcl='git clone'
 alias ga='git add'
 alias gp='git pull'
 alias gpr='git pull -r'
 alias gd='git diff'
-alias gb='git blame'
+alias gb='git branch'
+alias gbl='git blame'
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 
 # If not root, prepend sudo when needed
 if [ $UID -ne 0 ]; then
-	#alias reboot='sudo reboot'
-	#alias poweroff='sudo poweroff'
-	alias pacman='sudo pacman'
+    alias pacman='sudo pacman'
     alias netcfg='sudo netcfg'
     alias wifi-menu='sudo wifi-menu'
     alias vpnc='sudo vpnc'
