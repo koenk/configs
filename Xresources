@@ -11,7 +11,6 @@ URxvt*background: #000000
 URxvt*foreground: #ffffff
 URxvt.scrollBar: false
 URxvt*termName: screen-256color
-URxvt.intensityStyles: false
 URxvt.perl-ext: default,url-select,clipboard
 ! Open urls
 URxvt.keysym.M-u: perl:url-select:select_next
@@ -22,3 +21,8 @@ URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
 ! That utf8 input box thing when pressing ctrl+shift
 URxvt.iso14755: false
+! Normally all bold colors are automatically high-intensity. Disable that, but
+! fix the colorvalue of black to always be identical to its high-intensity
+! counterpart, otherwise programs like htop break.
+URxvt.intensityStyles: false
+URxvt.color0: Grey25
