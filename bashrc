@@ -18,8 +18,8 @@ bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 
 # Fix some autocomplete stuff
-#  Use chromium for pdf, htm(l)
-_xspecs[chromium]='!*.@(pdf|htm?(l))'
+#  Use chromium for pdf, htm(l), images
+_xspecs[chromium]='!*.@(pdf|htm?(l)|png|jpg|gif)'
 complete -F _filedir_xspec chromium
 #  Love opens .love files...
 _xspecs[love]='!*.@(love)'
@@ -197,6 +197,10 @@ alias da='date "+%A, %B, %d, %Y [%T]"'
 alias dul='du --max-depth=1'
 alias cack='ack --color --group'
 alias ackc='cack'
+alias f='fg'
+alias c='cd'
+alias m='make'
+alias g='grep'
 
 # Git related shortcuts
 alias gs='git status'
@@ -257,22 +261,24 @@ function cd() {
 
 # Extracts any archive format you throw at it (kinda)
 extract () {
-    if [ -f $1 ] ; then
-      case $1 in
-        *.tar.bz2)   tar xjf $1     ;;
-        *.tar.gz)    tar xzf $1     ;;
-        *.bz2)       bunzip2 $1     ;;
-        *.rar)       unrar e $1     ;;
-        *.gz)        gunzip $1      ;;
-        *.tar)       tar xf $1      ;;
-        *.tbz2)      tar xjf $1     ;;
-        *.tgz)       tar xzf $1     ;;
-        *.zip)       unzip $1       ;;
-        *.Z)         uncompress $1  ;;
-        *.7z)        7z x $1        ;;
+    if [ -f "$1" ] ; then
+      case "$1" in
+        *.tar.bz2)   tar xjf "$1"     ;;
+        *.tar.gz)    tar xzf "$1"     ;;
+        *.bz2)       bunzip2 "$1"     ;;
+        *.rar)       unrar e "$1"     ;;
+        *.gz)        gunzip "$1"      ;;
+        *.tar)       tar xf "$1"      ;;
+        *.tbz2)      tar xjf "$1"     ;;
+        *.tgz)       tar xzf "$1"     ;;
+        *.zip)       unzip "$1"       ;;
+        *.Z)         uncompress "$1"  ;;
+        *.7z)        7z x "$1"        ;;
         *)     echo "'$1' cannot be extracted via extract()" ;;
          esac
      else
          echo "'$1' is not a valid file"
      fi
 }
+alias e='extract'
+alias x='extract'
