@@ -1,9 +1,13 @@
 # Check for an interactive session
 [ -z "$PS1" ] && return
 
-eval $(dircolors -b)
 shopt -s checkwinsize
-shopt -s autocd
+case "$OSTYPE" in
+    linux*)
+        eval $(dircolors -b)
+        shopt -s autocd
+    ;;
+esac
 
 shopt -s histappend
 export HISTSIZE=100000
@@ -141,7 +145,7 @@ generate_prompt() {
     fi
 
     # Number of sleeping jobs (when Ctrl-Z was pressed)
-    local stopped=$(jobs -s | wc -l)
+    local stopped=$(jobs -s | wc -l | tr -d ' ')
     if [ $stopped -eq 0 ]; then
         stopped=""
     else
@@ -174,7 +178,12 @@ PROMPT_COMMAND=generate_prompt
 
 
 # Set default options for some commands
-alias ls='ls --color=auto'
+
+case $OSTYPE in
+    linux*)  alias ls='ls --color=auto' ;;
+    darwin*) alias ls='ls -G' ;;
+esac
+
 alias grep='grep --color=auto'
 alias grep='grep -i'
 alias ack='ack -i'
