@@ -1,3 +1,9 @@
+--
+-- Awesome-wm configuration
+-- For awesome 3.5.x
+-- Adopted from default config of awesome 3.4
+--
+
 -- Standard awesome library
 local gears = require("gears")
 local awful = require("awful")
@@ -43,12 +49,16 @@ end
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvt"
-browser = "chromium"
+terminal = os.getenv("TERM_EMU") or "urxvt"
+browser = os.getenv("BROWSER") or "chromium"
 editor = os.getenv("EDITOR") or "vim"
-editor_cmd = terminal .. " -e " .. editor
-lock_command = "xlock"
-network_interface = "wlan0"
+lock_command = os.getenv("LOCK_COMMAND") or "xlock"
+network_interface = os.getenv("NETW_INTERFACE") or "wlan0"
+battery = os.getenv("BATTERY") or "BAT0"
+
+backlight_up = "xbacklight -inc 10"
+backlight_down = "xbacklight -dec 10"
+
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -86,7 +96,7 @@ end
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
 tags = {
-    names = {"irc", "im", "www", 4, 5, 6, 7, 8, 9},
+    names = {"irc", "mail", "www", 4, 5, 6, 7, 8, 9},
     layouts = {layouts[4], layouts[4], layouts[2], layouts[4], layouts[4],
                layouts[4], layouts[4], layouts[4], layouts[4]}
 }
@@ -126,7 +136,8 @@ vicious.register(memwidget,
             memtooltip:set_text(args[1].."% (".. args[2].."MB / "..args[3].."MB)")
             return args[1]
         end,
-        2)
+        9 -- seconds
+        )
 
 -- CPU graph
 cpuwidget = awful.widget.graph()
@@ -161,6 +172,35 @@ vicious.register(networkwidget,
             networktooltip:set_text("Network: "..dk.."KB/s "..uk.."KB/s")
             return 100 * (dm + um)
         end)
+
+-- Battery state
+batterywidget = wibox.widget.textbox()
+batterytooltip = awful.tooltip({ objects = { batterywidget }, })
+
+if battery ~= nil and battery ~= "" then
+    vicious.register(batterywidget,
+            vicious.widgets.bat,
+            function (widget, args)
+                local state = args[1]
+                local percentage = args[2]
+                local time = args[3]
+
+                local tt = ""
+                if state == "+" then
+                    tt = "Charging, time until fully charged: "
+                elseif state == "-" then
+                    tt = "Discharging, time remaining: "
+                else
+                    tt = "Fully charged, time: "
+                end
+                tt = tt .. time
+
+                batterytooltip:set_text(tt)
+                return "[" .. state .. " " .. percentage .. "%]"
+            end,
+            10, -- seconds
+            battery)
+end
 
 -- Volume
 volumecfg = {}
@@ -294,6 +334,8 @@ for s = 1, screen.count() do
     end
     right_layout:add(volumecfg.widget)
     right_layout:add(sep)
+    right_layout:add(batterywidget)
+    right_layout:add(sep)
     right_layout:add(cpuwidget)
     right_layout:add(sep)
     right_layout:add(memwidget)
@@ -388,7 +430,11 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86AudioLowerVolume", function ()
         volumecfg.down() end),
     awful.key({ }, "XF86AudioMute", function ()
-        volumecfg.toggle() end)
+        volumecfg.toggle() end),
+
+    -- Backlight control
+    awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn(backlight_up)   end),
+    awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn(backlight_down) end)
 )
 
 clientkeys = awful.util.table.join(
