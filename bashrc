@@ -15,19 +15,18 @@ export HISTFILESIZE=100000
 export HISTCONTROL=ignoreboth
 
 export EDITOR=vim
-export BROWSER=chromium
+export BROWSER=firefox-bin
+export PAGER="/usr/bin/less -isR"
 
 # Search in history with up/down keys
 bind '"\e[A":history-search-backward'
 bind '"\e[B":history-search-forward'
 
 # Fix some autocomplete stuff
-#  Use chromium for pdf, htm(l), images
-_xspecs[chromium]='!*.@(pdf|htm?(l)|png|jpg|gif)'
-complete -F _filedir_xspec chromium
-#  Love opens .love files...
-_xspecs[love]='!*.@(love)'
-complete -F _filedir_xspec love
+complete -f -o plusdirs -X '!*.pdf' mupdf
+complete -f -o plusdirs -X '!*.html?(l)' $BROWSER
+complete -f -o plusdirs -X '!*.(png|jpg|gif)' display
+complete -f -o plusdirs -X '!*.love' love
 
 #
 # Build a nice PS1 (prompt)
@@ -214,6 +213,7 @@ alias g='grep'
 # Git related shortcuts
 alias gs='git status'
 alias gc='git commit'
+alias gcu='git reset --soft HEAD^'
 alias gco='git checkout'
 alias gcl='git clone'
 alias ga='git add'
@@ -231,6 +231,9 @@ if [ $UID -ne 0 ]; then
     alias wifi-menu='sudo wifi-menu'
     alias vpnc='sudo vpnc'
     alias updatedb='sudo updatedb'
+    alias emerge='sudo emerge'
+    alias iwconfig='sudo iwconfig'
+    alias suspend='sudo pm-suspend'
 fi
 
 # Very specific stuff
@@ -274,11 +277,13 @@ extract () {
       case "$1" in
         *.tar.bz2)   tar xjf "$1"     ;;
         *.tar.gz)    tar xzf "$1"     ;;
+        *.tar.xz)    tar xJf "$1"     ;;
         *.bz2)       bunzip2 "$1"     ;;
         *.rar)       unrar e "$1"     ;;
         *.gz)        gunzip "$1"      ;;
         *.tar)       tar xf "$1"      ;;
         *.tbz2)      tar xjf "$1"     ;;
+        *.tbz)       tar xf "$1"      ;;
         *.tgz)       tar xzf "$1"     ;;
         *.zip)       unzip "$1"       ;;
         *.Z)         uncompress "$1"  ;;
