@@ -58,6 +58,11 @@ battery = os.getenv("BATTERY") or "BAT0"
 
 backlight_up = "xbacklight -inc 10"
 backlight_down = "xbacklight -dec 10"
+kbd_backlight_up = "kbdlight up"
+kbd_backlight_down = "kbdlight down"
+
+-- Percentage at which to give warnings for low battery
+battery_low_perc = 5
 
 
 -- Default modkey.
@@ -194,6 +199,19 @@ if battery ~= nil and battery ~= "" then
                     tt = "Fully charged, time: "
                 end
                 tt = tt .. time
+
+                if percentage < battery_low_perc and state == "-" then
+                    naughty.notify(
+                        { title = "Battery low: " .. percentage .. "%",
+                          text = time .. " hours remaining",
+                          timeout = 10,
+                          width = 300,
+                          icon = "/home/koen/icon_battery.png",
+                          bg = beautiful.bg_urgent,
+                          fg = beautiful.fg_urgent,
+                          border_color = beautiful.border_urgent})
+                end
+
 
                 batterytooltip:set_text(tt)
                 return "[" .. state .. " " .. percentage .. "%]"
@@ -425,16 +443,15 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey }, "p", function() menubar.show() end),
 
     -- Sound control
-    awful.key({ }, "XF86AudioRaiseVolume", function ()
-        volumecfg.up() end),
-    awful.key({ }, "XF86AudioLowerVolume", function ()
-        volumecfg.down() end),
-    awful.key({ }, "XF86AudioMute", function ()
-        volumecfg.toggle() end),
+    awful.key({ }, "XF86AudioRaiseVolume", function () volumecfg.up()     end),
+    awful.key({ }, "XF86AudioLowerVolume", function () volumecfg.down()   end),
+    awful.key({ }, "XF86AudioMute",        function () volumecfg.toggle() end),
 
     -- Backlight control
-    awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn(backlight_up)   end),
-    awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn(backlight_down) end)
+    awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn(backlight_up)       end),
+    awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn(backlight_down)     end),
+    awful.key({ }, "XF86KbdBrightnessUp",   function () awful.util.spawn(kbd_backlight_up)   end),
+    awful.key({ }, "XF86KbdBrightnessDown", function () awful.util.spawn(kbd_backlight_down) end)
 )
 
 clientkeys = awful.util.table.join(
