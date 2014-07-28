@@ -3,7 +3,7 @@ set nocompatible " With vi
 filetype plugin indent on
 set autochdir " Change into file's dir.
 set fileformats=unix,dos,mac " Support all, prefer unix
-set encoding=utf8 " Use UTF-8 as standard encoding
+set encoding=utf-8 " Use UTF-8 as standard encoding
 set hidden " Support hidden buffers (backgrounded buffers with unsaved changes)
 let mapleader="," " Change leader to , instead of \
 
@@ -15,6 +15,12 @@ let g:SuperTabDefaultCompletionType = "context" " Supertab
 let g:syntastic_python_flake8_args = '--ignore=E302,E128 --max-line-length=80'
 
 call pathogen#infect() " Pathogen for easy plugins
+
+let g:neocomplcache_enable_at_startup = 1
+
+python from powerline.vim import setup as powerline_setup
+python powerline_setup()
+python del powerline_setup
 
 set nobackup
 set nowritebackup
