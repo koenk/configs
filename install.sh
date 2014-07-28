@@ -2,78 +2,46 @@
 #
 # Installs all scripts in this repository using symlinks.
 #
-# Will put sudo in front of every command if needed. Set the do_root flag to
-# false to disable any action that would need sudo. This will only install files
-# into the user's home directory.
-#
 
-# Few basic options
-do_root=true
+# Simply remove files if they already exist or make backups?
 make_backups=false
-root_homedir="/root"
-
-# Where are all destinations located
-bashrc="$HOME/.bashrc"
-bashrc_root="$root_homedir/.profile"
-
-vimrc="$HOME/.vimrc"
-vimrc_root="$root_homedir/.vimrc"
-vimdir="$HOME/.vim"
-vimdir_root="$root_homedir/.vim"
-
-tmux="/etc/tmux.conf"
-xresources="$HOME/.Xresources"
-awesomerc="$HOME/.config/awesome/rc.lua"
-gitconfig="$HOME/.gitconfig"
-
-
-# How are the files called in the repository
-local_dir="$( cd "$( dirname "$0" )" && pwd)"
-local_bashrc="$local_dir/bashrc"
-local_vimrc="$local_dir/vimrc"
-local_vimdir="$local_dir/vim"
-local_tmux="$local_dir/tmux.conf"
-local_xresources="$local_dir/Xresources"
-local_awesomerc="$local_dir/awesome_rc.lua"
-local_gitconfig="$local_dir/gitconfig"
 
 function do_install() {
-    # Sudo stuff
-    cmd_prefix=""
-    if [ $# -eq 3 ]; then
-        if ! $do_root; then
-            echo " :: Ignoring root file $2"
-            return
-        else
-            cmd_prefix="sudo "
-        fi
-    fi
-
-    echo " :: Installing $1 as $2"
+    local_dir="$( cd "$( dirname "$0" )" && pwd)"
+    local_file="$local_dir/$1"
+    target_file="$HOME/$2"
+    echo " :: Installing $local_file as $target_file"
 
     # File already exists?
-    if $cmd_prefix [ -e $2 ]; then
+    if [ -e $target_file ]; then
         if $make_backups; then
-            cmd="mv "$2" "$2.bak""
+            cmd="mv "$target_file" "$target_file.bak""
         else
             cmd="rm "$2""
         fi
-        #echo "$cmd_prefix$cmd"
-        $($cmd_prefix$cmd)
+        echo "$cmd"
+        #$($cmd)
     fi
-
-    cmd="ln -sT "$1" "$2""
-    #echo "$cmd_prefix$cmd"
-    $($cmd_prefix$cmd)
+    if [ $# -eq 3 ]; then
+        cmd="cp "$local_file" "$target_file""
+    else
+        cmd="ln -sT "$local_file" "$target_file""
+    fi
+    echo "$cmd"
+    #$($cmd)
 }
 
-do_install "$local_bashrc" "$bashrc"
-do_install "$local_bashrc" "$bashrc_root" "root"
-do_install "$local_vimrc" "$vimrc"
-do_install "$local_vimrc" "$vimrc_root" "root"
-do_install "$local_vimdir" "$vimdir"
-do_install "$local_vimdir" "$vimdir_root" "root"
-do_install "$local_tmux" "$tmux" "root"
-do_install "$local_xresources" "$xresources"
-do_install "$local_awesomerc" "$awesomerc"
-do_install "$local_gitconfig" "$gitconfig"
+# Install oh-my-zsh (to ~/.oh-my-zsh)
+curl -L http://install.ohmyz.sh | sh
+
+# Symlink(/copy) files
+do_install "bashrc" ".bashrc"
+do_install "zshrc" ".zshrc"
+do_install "shell_aliasses" ".shell_aliasses"
+do_install "shell_local" ".shell_local" "copy instead of symlink"
+do_install "vimrc" ".vimrc"
+do_install "vim" ".vim"
+do_install "Xresources" ".Xresources"
+do_install "awesome_rc.lua" ".config/awesome/rc.lua"
+do_install "gitconfig" ".gitconfig"
+
