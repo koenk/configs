@@ -17,18 +17,18 @@ function do_install() {
         if $make_backups; then
             cmd="mv "$target_file" "$target_file.bak""
         else
-            cmd="rm "$2""
+            cmd="rm "$target_file""
         fi
-        echo "$cmd"
-        #$($cmd)
+        #echo "$cmd"
+        $($cmd)
     fi
     if [ $# -eq 3 ]; then
         cmd="cp "$local_file" "$target_file""
     else
         cmd="ln -sT "$local_file" "$target_file""
     fi
-    echo "$cmd"
-    #$($cmd)
+    #echo "$cmd"
+    $($cmd)
 }
 
 # Install oh-my-zsh (to ~/.oh-my-zsh)
