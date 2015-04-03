@@ -14,6 +14,9 @@ let g:SuperTabDefaultCompletionType = "context" " Supertab
 " Also set max line length to 80 instead of 79.
 let g:syntastic_python_flake8_args = '--ignore=E302,E128 --max-line-length=80'
 
+" Disable javac for java files, it's very slow and doesn't work in projects.
+let g:syntastic_java_checkers = ['']
+
 call pathogen#infect() " Pathogen for easy plugins
 
 let g:neocomplcache_enable_at_startup = 1
@@ -38,8 +41,8 @@ set showmatch " Matching braces
 set cursorline " Highlight current line
 set laststatus=2 " Always show status line
 set wildmenu " Better tab-complete when selecting files
-set wildmode=list:longest " Like bash (complete to common string, show list)
-set wildignore=*.pdf,*.pyc,*.o,*.so,*.jpg,*.png,main,*~
+set wildmode=list:longest,full " Complete to common string, 2nd tab scrolls
+set wildignore=*.pdf,*.pyc,*.o,*.so,*.jpg,*.png,main,*~,*.d
 set scrolloff=5 " Always keep current line five lines off the screen edge
 
 " No sound/bells
