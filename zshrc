@@ -9,6 +9,10 @@ SAVEHIST=1000000
 # Emacs mods
 bindkey -e
 
+for i in {0..9}; do
+    bindkey -r "^[$i"
+done
+
 # Autocomplete
 zstyle :compinstall filename '/home/koen/.zshrc'
 autoload -Uz compinit
@@ -19,6 +23,12 @@ export ZSH=$HOME/.oh-my-zsh
 COMPLETION_WAITING_DOTS="true" # Red dots whilst waiting for completion
 plugins=(git ssh mosh zsh-syntax-highlighting)
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
+
+autoload -U history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+bindkey "^[[A" history-beginning-search-backward-end
+bindkey "^[[B" history-beginning-search-forward-end
 
 # Powerline for PS1
 source /usr/share/zsh/site-contrib/powerline.zsh
