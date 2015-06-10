@@ -46,4 +46,7 @@ do_install "awesome_rc.lua" ".config/awesome/rc.lua"
 do_install "gitconfig" ".gitconfig"
 
 # Let Vundle install all git plugins
+mkdir -p vim/bundle
+cd vim/bundle
+git clone https://github.com/gmarik/Vundle.vim.git
 vim +PluginInstall +qall
