@@ -10,7 +10,7 @@ xterm*foreground: #ffffff
 URxvt*background: #000000
 URxvt*foreground: #ffffff
 URxvt.scrollBar: false
-URxvt.perl-ext: default,url-select,clipboard
+URxvt.perl-ext: default,url-select,clipboard,font-size
 ! Open urls
 URxvt.keysym.M-u: perl:url-select:select_next
 URxvt.url-select.launcher: firefox-bin
@@ -18,6 +18,10 @@ URxvt.url-select.underline: true
 ! Clipboard integration with X
 URxvt.keysym.M-c: perl:clipboard:copy
 URxvt.keysym.M-v: perl:clipboard:paste
+! Change font-size on the fly
+URxvt.keysym.C-Up:    perl:font-size:increase
+URxvt.keysym.C-Down:  perl:font-size:decrease
+URxvt.font-size.step: 2
 ! That utf8 input box thing when pressing ctrl+shift
 URxvt.iso14755: false
 ! Different font, also compatible with powerline
