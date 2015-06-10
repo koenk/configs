@@ -45,3 +45,5 @@ do_install "Xresources" ".Xresources"
 do_install "awesome_rc.lua" ".config/awesome/rc.lua"
 do_install "gitconfig" ".gitconfig"
 
+# Let Vundle install all git plugins
+vim +PluginInstall +qall

@@ -1,5 +1,24 @@
-" General
 set nocompatible " With vi
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+Plugin 'gmarik/Vundle.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'mileszs/ack.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-scripts/gitignore'
+Plugin 'bling/vim-airline'
+"Plugin 'Valloric/YouCompleteMe'
+call vundle#end()
+
+" Disable powerline (if present) and set up airline
+let g:powerline_loaded = 1
+let g:airline_powerline_fonts = 1
+let g:airline_theme='powerlineish'
+
 filetype plugin indent on
 set autochdir " Change into file's dir.
 set fileformats=unix,dos,mac " Support all, prefer unix
@@ -17,17 +36,11 @@ let g:syntastic_python_flake8_args = '--ignore=E302,E128 --max-line-length=80'
 " Disable javac for java files, it's very slow and doesn't work in projects.
 let g:syntastic_java_checkers = ['']
 
-call pathogen#infect() " Pathogen for easy plugins
-
-let g:neocomplcache_enable_at_startup = 1
-
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
-
 set nobackup
 set nowritebackup
 set noswapfile
+set undofile
+set undodir=~/.vim/undodir
 
 set textwidth=80 " 80 chars per line
 if exists('+colorcolumn')
@@ -89,6 +102,9 @@ nmap Y y$
 
 " Clears search highlighting
 nnoremap <space> :noh<CR>
+
+" Faster saving
+nnoremap <leader>w :w<CR>
 
 " Select pasted text
 nnoremap <leader>v V`]
