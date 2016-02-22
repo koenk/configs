@@ -2,8 +2,7 @@
 
 
 # Default arguments (colors, case-insensitive)
-alias grep='grep --color=auto'
-alias grep='grep -i'
+alias grep='grep -i --color=auto'
 alias ack='ack -i'
 alias df='df -h'
 alias du='du -c -h'
@@ -35,11 +34,13 @@ alias c='cd'
 alias m='make'
 alias g='grep'
 alias l='ls'
+alias mi='make install'
+alias mc='make clean'
 
 # Git related shortcuts
 alias gs='git status'
 alias gc='git commit'
-alias gcu='git reset --soft HEAD^'
+alias gcu='git reset --soft "HEAD^"'
 alias gco='git checkout'
 alias gcl='git clone'
 alias ga='git add'
@@ -57,6 +58,7 @@ if [ $UID -ne 0 ]; then
     alias wifi-menu='sudo wifi-menu'
     alias updatedb='sudo updatedb'
     alias emerge='sudo emerge'
+    alias apt-get='sudo apt-get'
     alias iwconfig='sudo iwconfig'
     alias suspend='sudo pm-suspend'
     alias reboot='sudo reboot'

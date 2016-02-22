@@ -26,3 +26,4 @@ URxvt.font-size.step: 2
 URxvt.iso14755: false
 ! Different font, also compatible with powerline
 URxvt*font: xft:Terminess Powerline:size=8
+URxvt*color12: rgb:5c/5c/ff
