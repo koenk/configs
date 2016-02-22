@@ -141,8 +141,15 @@ vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " Make this (it deletes all chars on line in insert mode) undo-able better.
 inoremap <C-U> <C-G>u<C-U>
 
+fun! StripTrailingWhitespace()
+    let l = line(".")
+    let c = col(".")
+    %s/\s\+$//e
+    call cursor(l, c)
+endfun
+
 " Remove trailing whitespace
-au BufWrite * :%s/\s\+$//e
+au BufWrite * :call StripTrailingWhitespace()
 
 " Restore last cursor position
 if has("autocmd")
