@@ -60,6 +60,7 @@ backlight_up = "xbacklight -inc 10"
 backlight_down = "xbacklight -dec 10"
 kbd_backlight_up = "kbdlight up"
 kbd_backlight_down = "kbdlight down"
+suspend_command = "sudo pm-suspend"
 
 -- Percentage at which to give warnings for low battery
 battery_low_perc = 5
@@ -451,7 +452,9 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn(backlight_up)       end),
     awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn(backlight_down)     end),
     awful.key({ }, "XF86KbdBrightnessUp",   function () awful.util.spawn(kbd_backlight_up)   end),
-    awful.key({ }, "XF86KbdBrightnessDown", function () awful.util.spawn(kbd_backlight_down) end)
+    awful.key({ }, "XF86KbdBrightnessDown", function () awful.util.spawn(kbd_backlight_down) end),
+
+    awful.key({ }, "XF86AudioPlay", function () awful.util.spawn(suspend_command) end)
 )
 
 clientkeys = awful.util.table.join(
