@@ -22,6 +22,7 @@ compinit
 export ZSH=$HOME/.oh-my-zsh
 COMPLETION_WAITING_DOTS="true" # Red dots whilst waiting for completion
 plugins=(git ssh mosh zsh-syntax-highlighting)
+ZSH_THEME="koenk"
 source $HOME/.oh-my-zsh/oh-my-zsh.sh
 
 autoload -U history-search-end

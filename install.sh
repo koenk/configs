@@ -44,6 +44,7 @@ do_install "vim" ".vim"
 do_install "Xresources" ".Xresources"
 do_install "awesome_rc.lua" ".config/awesome/rc.lua"
 do_install "gitconfig" ".gitconfig"
+do_install "koenk.zsh-theme" ".oh-my-zsh/themes/koenk.zsh-theme"
 
 # Let Vundle install all git plugins
 mkdir -p vim/bundle
