@@ -3,8 +3,8 @@ unsetopt beep
 
 # More history
 HISTFILE=~/.histfile
-HISTSIZE=10000
-SAVEHIST=1000000
+HISTSIZE=100000
+SAVEHIST=10000000
 
 # Emacs mods
 bindkey -e
@@ -44,7 +44,7 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 # Powerline for PS1
-source /usr/share/zsh/site-contrib/powerline.zsh
+#source /usr/share/zsh/site-contrib/powerline.zsh
 
 # Load aliasses etc shared with bash
 source $HOME/.shell_aliasses
