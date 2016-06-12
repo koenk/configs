@@ -1,0 +1,56 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+        colors = true
+        interval = 5
+}
+
+order += "volume master"
+order += "disk /"
+#order += "wireless wlan0"
+order += "ethernet eno1"
+#order += "battery 0"
+order += "cpu_usage"
+order += "load"
+order += "tztime local"
+
+volume master {
+    mixer = "Master"
+}
+
+wireless wlan0 {
+        #format_up = "W: (%quality at %essid) %ip"
+        format_up = "W: (%quality @ %essid)"
+        format_down = "W: down"
+}
+
+ethernet eno1 {
+        # if you use %speed, i3status requires root privileges
+        #format_up = "E: %ip (%speed)"
+        format_up = "E: up"
+        format_down = "E: down"
+}
+
+battery 0 {
+        format = "%status %percentage %remaining"
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M:%S"
+}
+
+load {
+        format = "%1min %5min %15min"
+}
+
+disk "/" {
+        format = "hdd: %free"
+        #low_threshold = 2
+        #threshold_type = "gbytes_avail"
+}

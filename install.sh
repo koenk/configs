@@ -10,6 +10,13 @@ function do_install() {
     local_dir="$( cd "$( dirname "$0" )" && pwd)"
     local_file="$local_dir/$1"
     target_file="$HOME/$2"
+    target_dir="$(dirname "$target_file")"
+
+    if [ ! -d "$target_dir" ]; then
+        echo " :: Creating $target_dir"
+        mkdir -p "$target_dir"
+    fi
+
     echo " :: Installing $local_file as $target_file"
 
     # File already exists?
@@ -43,6 +50,8 @@ do_install "vimrc" ".vimrc"
 do_install "vim" ".vim"
 do_install "Xresources" ".Xresources"
 do_install "awesome_rc.lua" ".config/awesome/rc.lua"
+do_install "i3_config" ".i3/config"
+do_install "i3status_config" ".i3/i3status_config"
 do_install "gitconfig" ".gitconfig"
 do_install "koenk.zsh-theme" ".oh-my-zsh/themes/koenk.zsh-theme"
 
