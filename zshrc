@@ -3,7 +3,7 @@ unsetopt beep
 
 # More history
 HISTFILE=~/.histfile
-HISTSIZE=100000
+HISTSIZE=10000000
 SAVEHIST=10000000
 
 # Emacs mods
