@@ -63,7 +63,6 @@ set wrap " And otherwise always
 set number " Line numbers
 set relativenumber " Show them relative to cursor (except current)
 set numberwidth=5 " 99999 lines max
-set relativenumber
 set showmatch " Matching braces
 set cursorline " Highlight current line
 set laststatus=2 " Always show status line
