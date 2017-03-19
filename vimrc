@@ -12,6 +12,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/gitignore'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'rust-lang/rust.vim'
 "Plugin 'Valloric/YouCompleteMe'
 call vundle#end()
 
