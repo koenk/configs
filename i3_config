@@ -27,8 +27,8 @@ new_window pixel 1
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+space exec i3-sensible-terminal
+bindsym $mod+Return exec urxvt
+bindsym $mod+space exec urxvt
 
 # start browser
 bindsym $mod+b exec /home/koen/Downloads/firefox/firefox
@@ -77,9 +77,9 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-#bindsym $mod+s layout stacking
-#bindsym $mod+w layout tabbed
-#bindsym $mod+e layout toggle split
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 #bindsym $mod+Shift+space floating toggle
@@ -129,6 +129,13 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # lock machine
 bindsym $mod+Shift+v exec i3lock -d
+
+# Multimedia keys
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
