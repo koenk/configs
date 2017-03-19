@@ -30,6 +30,8 @@ zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 bindkey "^[[A" history-beginning-search-backward-end
 bindkey "^[[B" history-beginning-search-forward-end
+bindkey "^[Oc" forward-word
+bindkey "^[Od" backward-word
 
 fancy-ctrl-z () {
     if [[ $#BUFFER -eq 0 ]]; then
