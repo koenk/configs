@@ -18,7 +18,7 @@ call vundle#end()
 
 " Disable powerline (if present) and set up airline
 let g:powerline_loaded = 1
-let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts = 1
 let g:airline_theme='powerlineish'
 
 filetype plugin indent on
@@ -39,6 +39,15 @@ let g:syntastic_python_flake8_args = '--ignore=E302,E128 --max-line-length=80'
 " Disable javac for java files, it's very slow and doesn't work in projects.
 let g:syntastic_java_checkers = ['']
 
+" Improve speed of CtrlP by using external ag tool.
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+" Better Ctrl-P bindings: ctrl-p for mixed (files, buffers, mru)
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlPMixed'
+" And ctrl-o to use file-only mode
+nmap <C-o> :CtrlP<CR>
+
 set nobackup
 set nowritebackup
 set noswapfile
@@ -54,12 +63,13 @@ set wrap " And otherwise always
 set number " Line numbers
 set relativenumber " Show them relative to cursor (except current)
 set numberwidth=5 " 99999 lines max
+set relativenumber
 set showmatch " Matching braces
 set cursorline " Highlight current line
 set laststatus=2 " Always show status line
 set wildmenu " Better tab-complete when selecting files
 set wildmode=list:longest,full " Complete to common string, 2nd tab scrolls
-set wildignore=*.pdf,*.pyc,*.o,*.so,*.jpg,*.png,main,*~,*.d
+set wildignore=*.pdf,*.pyc,*.o,*.so,*.a,*.jpg,*.png,main,*~,*.d
 set scrolloff=5 " Always keep current line five lines off the screen edge
 
 " No sound/bells
@@ -167,3 +177,7 @@ command! Wq wq
 
 " Auto reload vimrc after editing
 autocmd! bufwritepost ~/.vimrc source ~/.vimrc
+
+augroup filetype
+    au! BufRead,BufNewFile *.ll     set filetype=llvm
+augroup END
