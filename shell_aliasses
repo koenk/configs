@@ -25,6 +25,7 @@ alias v='vim -R -' # Piping into vim
 alias hist='history|grep $1' # Search history
 alias da='date "+%A, %B, %d, %Y [%T]"'
 alias dul='du --max-depth=1'
+alias duls='du --max-depth=1 | sort -h'
 alias cack='ack --color --group'
 alias ackc='cack'
 
@@ -47,6 +48,7 @@ alias ga='git add'
 alias gp='git pull'
 alias gpr='git pull -r'
 alias gd='git diff'
+alias gdc='git diff --cached'
 alias gb='git branch'
 alias gbl='git blame'
 alias gl="git log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
