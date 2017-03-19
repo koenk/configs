@@ -23,6 +23,7 @@ let g:airline_theme='powerlineish'
 
 filetype plugin indent on
 set autochdir " Change into file's dir.
+autocmd VimEnter * set autochdir
 set fileformats=unix,dos,mac " Support all, prefer unix
 set encoding=utf-8 " Use UTF-8 as standard encoding
 set hidden " Support hidden buffers (backgrounded buffers with unsaved changes)
