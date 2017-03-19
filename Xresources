@@ -12,6 +12,7 @@ URxvt*foreground: #ffffff
 ! Better, more visible (lighter) color blue
 URxvt*color12: rgb:5c/5c/ff
 URxvt.scrollBar: false
+URxvt.perl-lib: /home/koen/git/urxvt-perls
 URxvt.perl-ext: default,url-select,clipboard,font-size
 ! Open urls
 URxvt.keysym.M-u: perl:url-select:select_next
