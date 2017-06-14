@@ -53,6 +53,7 @@ do_install "awesome_rc.lua" ".config/awesome/rc.lua"
 do_install "i3_config" ".i3/config"
 do_install "i3status_config" ".i3/i3status_config"
 do_install "gitconfig" ".gitconfig"
+do_install "global_gitignore" ".global_gitignore"
 do_install "koenk.zsh-theme" ".oh-my-zsh/themes/koenk.zsh-theme"
 
 # Let Vundle install all git plugins
