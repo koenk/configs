@@ -98,6 +98,15 @@ function cd() {
     fi
 }
 
+# Run objdump on a file, open in vim with syntax highlighting
+function dis() {
+    if [ ! -f "$1" ]; then
+        echo "dis: file '$1' does not exist"
+        return
+    fi
+    objdump -d $1 | vim -R - "+set ft=dis"
+}
+
 # Extracts any archive format you throw at it (kinda)
 extract () {
     if [ -f "$1" ] ; then
