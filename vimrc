@@ -13,7 +13,7 @@ Plugin 'vim-scripts/gitignore'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'rust-lang/rust.vim'
-"Plugin 'Valloric/YouCompleteMe'
+Plugin 'shougo/neocomplete.vim'
 call vundle#end()
 
 " Disable powerline (if present) and set up airline
@@ -47,6 +47,18 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlPMixed'
 " And ctrl-o to use file-only mode
 nmap <C-o> :CtrlP<CR>
+
+let g:acp_enableAtStartup = 0
+let g:neocomplete#enable_at_startup = 1
+let g:neocomplete#enable_smart_case = 1
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+    return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+endfunction
+inoremap <expr><TAB> pumvisible() ? "\<CR>" : "\<TAB>"
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+let g:neocomplete#enable_auto_select = 1
+
 
 set nobackup
 set nowritebackup
