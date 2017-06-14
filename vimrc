@@ -103,6 +103,7 @@ color wombat256mod
 hi ColorColumn              ctermbg=239 guibg=lightgrey
 "hi Pmenu       ctermfg=252  ctermbg=240
 "hi PmenuSel    ctermfg=254  ctermbg=243
+set t_ut= " Fixes background color issue in for instance tmux
 
 " Also map : to ; for no-shift
 nnoremap ; :
@@ -177,6 +178,10 @@ command! Wq wq
 " Auto reload vimrc after editing
 autocmd! bufwritepost ~/.vimrc source ~/.vimrc
 
+" Auto enable spellchecking for text-based files
+autocmd FileType tex,markdown setlocal spell
+
 augroup filetype
     au! BufRead,BufNewFile *.ll     set filetype=llvm
+    au! BufRead,BufNewFile *.inc    set filetype=sh
 augroup END
