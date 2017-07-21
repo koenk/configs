@@ -104,7 +104,7 @@ function dis() {
         echo "dis: file '$1' does not exist"
         return
     fi
-    objdump -d $1 | vim -R - "+set ft=dis"
+    objdump -d $1 | vim -R - "+set ft=dis" "+/<main>"
 }
 
 # Extracts any archive format you throw at it (kinda)
