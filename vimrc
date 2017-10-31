@@ -205,3 +205,10 @@ augroup filetype
     au! BufRead,BufNewFile *.ll     set filetype=llvm
     au! BufRead,BufNewFile *.inc    set filetype=sh
 augroup END
+
+" Use ag (silversearcher) instead of ack because of speed
+if executable('ag')
+    let g:ackprg = 'ag --vimgrep'
+endif
+let g:ack_autoclose = 1 " Close quickfix window when pressing enter
+cnoreabbrev ag Ack!
