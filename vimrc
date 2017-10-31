@@ -192,6 +192,8 @@ command! W w
 command! Q q
 command! WQ wq
 command! Wq wq
+command! Qa qa
+command! QA qa
 
 " Auto reload vimrc after editing
 autocmd! bufwritepost ~/.vimrc source ~/.vimrc
