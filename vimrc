@@ -164,6 +164,10 @@ nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
+" Shortcut for wrapping selected text and paragraph into text width.
+vmap Q gq
+nmap Q gqap
+
 " Make this (it deletes all chars on line in insert mode) undo-able better.
 inoremap <C-U> <C-G>u<C-U>
 
