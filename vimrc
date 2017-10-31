@@ -13,6 +13,7 @@ Plugin 'vim-scripts/gitignore'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'rust-lang/rust.vim'
+Plugin 'szw/vim-tags'
 Plugin 'shougo/neocomplete.vim'
 call vundle#end()
 
@@ -65,6 +66,7 @@ set nowritebackup
 set noswapfile
 set undofile
 set undodir=~/.vim/undodir
+set tags=./.tags
 
 set textwidth=80 " 80 chars per line
 if exists('+colorcolumn')
