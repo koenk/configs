@@ -189,6 +189,16 @@ if has("autocmd")
     au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 endif
 
+" When joining lines, remove leading comment markers
+set formatoptions+=j
+
+" When automatically breaking lines (because of textwidth), don't leave
+" a one-letter word on the line.
+set formatoptions+=1
+
+" Show tabs, trailing whitespace, non-breakable spaces
+set list listchars=tab:→\ ,nbsp:␣,trail:•,extends:⟩,precedes:⟨
+
 command! W w
 command! Q q
 command! WQ wq
