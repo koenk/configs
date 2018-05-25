@@ -15,6 +15,7 @@ Plugin 'vim-airline/vim-airline-themes'
 Plugin 'rust-lang/rust.vim'
 Plugin 'szw/vim-tags'
 Plugin 'shougo/neocomplete.vim'
+Plugin 'godlygeek/tabular'
 call vundle#end()
 
 " Disable powerline (if present) and set up airline
