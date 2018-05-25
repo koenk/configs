@@ -16,7 +16,7 @@ URxvt.perl-lib: /home/koen/git/urxvt-perls
 URxvt.perl-ext: default,url-select,clipboard,font-size
 ! Open urls
 URxvt.keysym.M-u: perl:url-select:select_next
-URxvt.url-select.launcher: firefox-bin
+URxvt.url-select.launcher: google-chrome
 URxvt.url-select.underline: true
 ! Clipboard integration with X
 URxvt.keysym.M-c: perl:clipboard:copy
