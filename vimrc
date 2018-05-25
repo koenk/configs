@@ -16,6 +16,7 @@ Plugin 'rust-lang/rust.vim'
 Plugin 'szw/vim-tags'
 Plugin 'shougo/neocomplete.vim'
 Plugin 'godlygeek/tabular'
+Plugin 'haya14busa/vim-asterisk'
 call vundle#end()
 
 " Disable powerline (if present) and set up airline
@@ -170,6 +171,15 @@ vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 " Shortcut for wrapping selected text and paragraph into text width.
 vmap Q gq
 nmap Q gqap
+
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+map g*  <Plug>(asterisk-g*)
+map g#  <Plug>(asterisk-g#)
+map z*  <Plug>(asterisk-z*)
+map gz* <Plug>(asterisk-gz*)
+map z#  <Plug>(asterisk-z#)
+map gz# <Plug>(asterisk-gz#)
 
 " Make this (it deletes all chars on line in insert mode) undo-able better.
 inoremap <C-U> <C-G>u<C-U>
