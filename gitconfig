@@ -9,3 +9,7 @@
     addnw = !sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
 [core]
 	excludesfile = ~/.global_gitignore
+[pull]
+        rebase = true
+[rebase]
+        autoStash = true
