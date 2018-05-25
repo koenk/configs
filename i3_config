@@ -31,7 +31,7 @@ bindsym $mod+Return exec urxvt
 bindsym $mod+space exec urxvt
 
 # start browser
-bindsym $mod+b exec /home/koen/Downloads/firefox/firefox
+bindsym $mod+b exec google-chrome
 
 # kill focused window
 bindsym $mod+q kill
