@@ -39,6 +39,9 @@ let g:SuperTabDefaultCompletionType = "context" " Supertab
 " Also set max line length to 80 instead of 79.
 let g:syntastic_python_flake8_args = '--ignore=E302,E128 --max-line-length=80'
 
+" Force python3 for syntax checking.
+let g:syntastic_python_python_exec = '/usr/bin/python3'
+
 " Disable javac for java files, it's very slow and doesn't work in projects.
 let g:syntastic_java_checkers = ['']
 
