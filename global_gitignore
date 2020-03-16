@@ -1,2 +1,6 @@
 .gdb_history
 .syntastic_cpp_config
+cscope.files
+cscope.in.out
+cscope.out
+cscope.po.out
