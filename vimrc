@@ -4,7 +4,7 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'scrooloose/syntastic'
+Plugin 'dense-analysis/ale'
 Plugin 'mileszs/ack.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-commentary'
@@ -17,6 +17,7 @@ Plugin 'szw/vim-tags'
 Plugin 'shougo/neocomplete.vim'
 Plugin 'godlygeek/tabular'
 Plugin 'haya14busa/vim-asterisk'
+Plugin 'Vimjas/vim-python-pep8-indent'
 call vundle#end()
 
 " Disable powerline (if present) and set up airline
@@ -35,15 +36,20 @@ let mapleader="," " Change leader to , instead of \
 set ofu=syntaxcomplete#Complete " Omnicomplete
 let g:SuperTabDefaultCompletionType = "context" " Supertab
 
-" For python pep8 checker thing, disable under-indent and 2-blank-line nagging.
-" Also set max line length to 80 instead of 79.
-let g:syntastic_python_flake8_args = '--ignore=E302,E128 --max-line-length=80'
+" Tune python syntax checker:
+"  E221 Multiple spaces before operator
+"  E701 Multiple statements on one line (colon)
+"  E704 Multiple statements on one line (def)
+"  W503 Line break occurred before a binary operator
+"  E265 Block comment should start with '# '
+"  E266 Too many leading '#' for block comment
+"  F541 f-string without any placeholders
+let g:ale_python_flake8_options = '--ignore=E221,E701,E704,W503,E265,E266,F541 --max-line-length=120'
 
-" Force python3 for syntax checking.
-let g:syntastic_python_python_exec = '/usr/bin/python3'
-
-" Disable javac for java files, it's very slow and doesn't work in projects.
-let g:syntastic_java_checkers = ['']
+let g:ale_linters = {
+      \   'python': ['flake8'],
+      \   'scala': ['sbtserver'],
+      \}
 
 " Improve speed of CtrlP by using external ag tool.
 let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
@@ -225,6 +231,7 @@ autocmd! bufwritepost ~/.vimrc source ~/.vimrc
 " Auto enable spellchecking for text-based files
 autocmd FileType tex,markdown setlocal spell
 
+
 augroup filetype
     au! BufRead,BufNewFile *.ll     set filetype=llvm
     au! BufRead,BufNewFile *.inc    set filetype=sh
@@ -258,3 +265,6 @@ function! LoadCscope()
   endif
 endfunction
 au BufEnter /* call LoadCscope()
+
+" Language specific settings
+au FileType python set textwidth=120
