@@ -1,15 +1,15 @@
 [user]
-	name = Koen Koning
-	email = koenkoning@gmail.com
+    name = Koen Koning
+    email = koenkoning@gmail.com
 [color]
     ui = true
 [push]
-	default = simple
+    default = simple
 [alias]
     addnw = !sh -c 'git diff -U0 -w --no-color "$@" | git apply --cached --ignore-whitespace --unidiff-zero -'
 [core]
-	excludesfile = ~/.global_gitignore
+    excludesfile = ~/.global_gitignore
 [pull]
-        rebase = true
+    rebase = true
 [rebase]
-        autoStash = true
+    autoStash = true
