@@ -6,7 +6,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'dense-analysis/ale'
 Plugin 'mileszs/ack.vim'
-Plugin 'kien/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'
 Plugin 'vim-scripts/gitignore'
@@ -99,6 +99,7 @@ set scrolloff=5 " Always keep current line five lines off the screen edge
 " No sound/bells
 set noerrorbells
 set novisualbell " Don't flash screen
+set belloff=all
 set t_vb=
 set tm=500
 
@@ -267,4 +268,5 @@ endfunction
 au BufEnter /* call LoadCscope()
 
 " Language specific settings
-au FileType python set textwidth=120
+au FileType python setlocal textwidth=120
+au FileType c,cpp setlocal cindent cinoptions=:0,l1,g0,(0
