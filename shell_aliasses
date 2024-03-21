@@ -98,13 +98,15 @@ function cd() {
     fi
 }
 
+alias dis='objdump -Mintel --reloc --disassembler-color=extended -d'
+function disl() { dis --visualize-jumps=extended-color $1 | less }
 # Run objdump on a file, open in vim with syntax highlighting
-function dis() {
+function disv() {
     if [ ! -f "$1" ]; then
         echo "dis: file '$1' does not exist"
         return
     fi
-    objdump -d $1 | vim -R - "+set ft=dis" "+/<main>"
+    objdump -Mintel -d $1 | vim -R - "+set ft=dis" "+/<main>"
 }
 
 # Extracts any archive format you throw at it (kinda)
