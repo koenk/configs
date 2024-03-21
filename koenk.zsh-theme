@@ -1,16 +1,9 @@
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="green"; fi
 local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
-
-prompt_jobs() {
-    local njobs
-    njobs="$(jobs -l | grep -v '^(pwd now' |  wc -l)"
-    if [[ $njobs -gt 0 ]]; then
-        echo "%{%F{white}%}$njobs "
-    fi
-}
+local jobs="%(1j.%{%F{white}%}%j .)"
 
 PROMPT='%{$fg_bold[$NCOLOR]%}%n%{$fg_bold[white]%}@%m%{$fg_bold[blue]%} %~ %{$reset_color%} \
-$(git_prompt_info)$(prompt_jobs)\
+$(git_prompt_info)${jobs}\
 %{$fg_bold[red]%}%(!.#.»)%{$reset_color%} '
 PROMPT2='%{$fg[red]%}\ %{$reset_color%}'
 RPS1='${return_code}'
