@@ -86,7 +86,6 @@ endif
 set linebreak " Break lines after 80 chars at logical points
 set wrap " And otherwise always
 set number " Line numbers
-set relativenumber " Show them relative to cursor (except current)
 set numberwidth=5 " 99999 lines max
 set showmatch " Matching braces
 set cursorline " Highlight current line
