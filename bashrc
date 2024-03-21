@@ -49,19 +49,7 @@ elif [[ ${USER} != "$(logname 2>/dev/null)" ]]; then
     user_col=${PURPLE}
 fi
 
-# Determine what to display as hostname (and color)
-hname=""
-if [[ "${HOSTNAME}" == "koeserv" ]]; then
-    hname="$CYAN@koeserv"
-elif [[ "${HOSTNAME}" == "sremote" || "${HOSTNAME}" == "deze" ||
-    "${USER}" == "koenk" ]]; then
-    hname="$YELLOW@UvA"
-elif [[ "${USER}" == "kkoning" ]]; then
-    hname="$BLUE@DAS4,${HOSTNAME}"
-elif [[ "$(who am i | awk '{print $5}')" != "" ]]; then
-    # Hacky way of detecting ssh (env vars won't work when su'ing)
-    hname="$WHITE@$HOSTNAME"
-fi
+hname="$WHITE@$HOSTNAME"
 
 # Git functions (mostly from https://github.com/nojhan/liquidprompt/)
 # Determines the branch of the current directory, if this is a git repo
